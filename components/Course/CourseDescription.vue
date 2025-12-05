@@ -3,18 +3,17 @@
     <!-- 要求部分 -->
     <div class="mb-8">
       <h2 class="text-2xl font-bold text-gray-900 mb-4">要求</h2>
-      <ul class="space-y-3">
-        <li
-          v-for="(requirement, index) in requirements"
-          :key="index"
-          class="flex items-start gap-3"
-        >
-          <div class="flex-shrink-0 mt-0.5">
-            <img src="/icons/check.svg" alt="check" class="w-5 h-5" />
-          </div>
-          <p class="text-sm text-gray-900 leading-relaxed">{{ requirement }}</p>
-        </li>
-      </ul>
+      <div>
+        <ul class="space-y-3 list-disc list-inside">
+          <li
+            v-for="(requirement, index) in requirements"
+            :key="index"
+            class="text-sm text-gray-900 leading-relaxed"
+          >
+            {{ requirement }}
+          </li>
+        </ul>
+      </div>
     </div>
 
     <!-- 描述部分 -->
@@ -73,6 +72,13 @@
 </template>
 
 <script setup>
+const requirements = ref([
+  "No programming experience needed - I'll teach you everything you need to know",
+  "A 64-bit Mac or PC computer with 4GB of memory and access to the internet",
+  "No paid software required - I'll teach you how to use PyCharm, Jupyter Notebooks and Google Colab",
+  "I'll walk you through, step-by-step how to get all the software installed and set up"
+])
+
 const isExpanded = ref(false)
 const descriptionRef = ref(null)
 const showToggleButton = ref(false)
