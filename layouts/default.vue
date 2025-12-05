@@ -1,9 +1,9 @@
 <template>
   <div class="min-h-screen">
-    <!-- <HeaderStickyHeader /> -->
+     <CommonStickyHeader />
      <CommonNavbar />
     <main>
-      <slot />
+    <slot />
     </main>
   </div>
 </template>

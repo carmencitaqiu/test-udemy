@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-white shadow-sm z-1000 py-4">
+    <header class="bg-white shadow-sm relative z-20 py-4">
       <!-- <nav class="container mx-auto px-4 py-4"> -->
         <div class="flex items-center justify-between px-4">
         <!-- 左侧：Logo + 分类 + 搜索框 -->
