@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full mt-20">
     <h2 class="text-2xl font-medium">学生还购买了</h2>
     
     <!-- 课程列表 -->

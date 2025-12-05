@@ -1,6 +1,6 @@
 <template>
     <!-- Hero Banner - 满屏深色背景 -->
-    <div class="bg-black text-white w-full">
+    <div class="bg-black text-white w-full pb-4">
       <div class="container mx-auto px-6 py-8 relative">
         <div class="max-w-[760px]">
           <!-- 面包屑导航 -->
@@ -19,27 +19,7 @@
           <!-- 畅销标签 -->
           <div class="inline-block mb-4">
             <CommonTag label="热门课程" type="hot" />
-            <!-- <span class="bg-silver rounded-md text-[#3D3C0A] text-xs  px-2 py-1">
-              热门课程
-            </span> -->
           </div>
-  
-          <!-- star rating -->
-          <!-- <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-            <div class="flex items-center space-x-2">
-              <span class="text-[#B4690E] font-bold">4.7</span>
-              <div class="flex">
-                <svg v-for="i in 5" :key="i" class="w-4 h-4 fill-current text-[#B4690E]" viewBox="0 0 20 20">
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                </svg>
-              </div>
-              <a href="#" class="text-purple-2 underline hover:text-purple-300">
-                (438,940 个评分)
-              </a>
-            </div>
-  
-            <span class="text-gray-300">1,518,814 名学生</span>
-          </div> -->
   
           <!-- 创建者信息 -->
           <div class="mt-2 text-sm">
@@ -49,7 +29,6 @@
             </a>
           </div>
   
-          <!-- 其他元信息 -->
           <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 text-sm text-gray-300">
             <!-- 更新时间图标 -->
             <div class="flex items-center space-x-1">
@@ -80,6 +59,8 @@
           </div>
         </div>
         <CourseBusinessCard />
+      <!-- 课程统计信息栏 -->
+      <CourseStatsBar />
       </div>
     </div>
   </template>

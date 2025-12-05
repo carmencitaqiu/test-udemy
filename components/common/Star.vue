@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center gap-1">
     <!-- 评分数字 -->
-    <span class="text-sm font-bold text-orange-600">{{ rating }}</span>
+    <span v-if="showNumber" class="text-sm font-bold text-orange-600">{{ rating }}</span>
 
     <!-- 完整星星 -->
     <svg
@@ -61,6 +61,10 @@ const props = defineProps({
   rating: {
     type: Number,
     required: true,
+  },
+  showNumber: {
+    type: Boolean,
+    default: false,
   },
 });
 
