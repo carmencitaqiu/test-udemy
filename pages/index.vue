@@ -5,6 +5,7 @@
       <div class="max-w-[760px] my-4">
         <CourseLearningOutcomes />
         <CourseIncludes />
+        <CourseCodePractice />
         <div class="mx-auto w-full">
           <UiAccordion :items="accordionData" :defaultVisibleCount="10">
             <UiAccordionItem
@@ -18,6 +19,7 @@
             />
           </UiAccordion>
         </div>
+        <CourseDescription />
         <CourseList />
         <CourseComplateProgrammer />
         <CourseInstructorProfile />
