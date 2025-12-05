@@ -3,6 +3,21 @@
     <CourseHero />
     <div class="container mx-auto ">
       <div class="max-w-[760px] my-4">
+        <CourseLearningOutcomes />
+        <CourseIncludes />
+        <div class="mx-auto w-full">
+          <UiAccordion :items="accordionData" :defaultVisibleCount="10">
+            <UiAccordionItem
+              v-for="(item, index) in accordionData"
+              :key="index"
+              :title="item.title"
+              :lectureCount="item.lectureCount"
+              :duration="item.duration"
+              :childrenList="item.childrenList"
+              :index="index"
+            />
+          </UiAccordion>
+        </div>
         <CourseList />
         <CourseComplateProgrammer />
         <CourseInstructorProfile />
@@ -12,19 +27,6 @@
           :reviews="reviewsData"
         />
         <CourseHorizontalList />
-        <div class="mx-auto w-full">
-        <UiAccordion :items="accordionData" :defaultVisibleCount="10">
-          <UiAccordionItem
-            v-for="(item, index) in accordionData"
-            :key="index"
-            :title="item.title"
-            :lectureCount="item.lectureCount"
-            :duration="item.duration"
-            :childrenList="item.childrenList"
-            :index="index"
-          />
-        </UiAccordion>
-      </div>
       </div>
     </div>
   </div>

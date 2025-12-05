@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center min-w-[760px] h-[95px] absolute -bottom-20 left-4 overflow-hidden border border-gray-200 rounded-lg border-solid">
+    <div class="flex items-center min-w-[760px] h-[95px] absolute -bottom-20 left-7 overflow-hidden border border-gray-200 rounded-lg border-solid">
       <div class="flex items-center gap-4 bg-blue-3 text-white px-9 py-4 flex-shrink-0 h-full rounded-l-lg">
         <div class="flex flex-col gap-1 h-full items-center justify-center">
           <span class="font-medium text-base">高级</span>

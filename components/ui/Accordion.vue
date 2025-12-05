@@ -1,21 +1,21 @@
 <template>
   <div class="w-full my-4">
     <!-- 标题区域 -->
-    <div class="px-4 py-4">
-      <div class="flex items-center justify-between mb-2">
-        <h2 class="text-xl font-bold text-gray-900">课程内容</h2>
+      <div class="flex items-end justify-between mb-2">
+        <div>
+          <h2 class="text-2xl font-medium text-gray-900 mb-6">课程内容</h2>
+          <div class="text-sm text-gray-600">
+            {{ totalChapters }} 个章节・{{ totalLectures }} 个讲座・总时长 {{ totalDuration }}
+          </div>
+        </div>
         <button
           @click="toggleExpandAll"
-          class="text-sm text-purple-600 hover:text-purple-700 underline"
+          class="text-sm text-purple-600 hover:text-purple-700"
         >
           {{ expandAllMode ? '折叠所有章节' : '展开所有章节' }}
         </button>
+        
       </div>
-      <div class="text-sm text-gray-600">
-        {{ totalChapters }} 个章节・{{ totalLectures }} 个讲座・总时长 {{ totalDuration }}
-      </div>
-    </div>
-    
     <slot />
     
     <!-- 显示更多章节按钮 -->
