@@ -1,10 +1,16 @@
 <template>
-  <div class="border-b border-gray-200 last:border-b-0">
+  <div
+    v-if="isVisible"
+    :class="[
+      'border-l border-r border-t border-gray-200',
+      isLast ? 'border-b' : ''
+    ]"
+  >
     <!-- Item 标题区域 -->
     <button
       @click="handleClick"
       :class="[
-        'w-full flex items-start justify-between py-4 px-4 text-left transition-colors duration-200',
+        'w-full bg-gray-50 flex items-start justify-between py-4 px-4 text-left transition-colors duration-200',
         isActive ? 'bg-gray-50' : 'hover:bg-gray-50'
       ]"
     >
@@ -46,12 +52,12 @@
         opacity: isActive ? 1 : 0
       }"
     >
-      <div ref="innerRef" class="px-4 pb-4">
+      <div ref="innerRef" class="px-4 pb-2">
         <ul class="space-y-1">
           <li
             v-for="(child, childIndex) in childrenList"
             :key="childIndex"
-            class="flex items-center gap-3 py-2 px-2 hover:bg-gray-50 rounded transition-colors duration-150"
+            class="flex items-center gap-3 py-2 px-2 cursor-pointer rounded transition-colors duration-150"
           >
             <slot name="child" :item="child" :index="childIndex">
               <!-- 左侧：视频图标（显示器+播放） -->
@@ -154,7 +160,45 @@ if (!accordion) {
 }
 
 const isActive = computed(() => {
-  return accordion?.activeIndex.value === props.index
+  if (!accordion) return false
+  
+  // 如果处于展开所有模式，检查索引是否在展开数组中
+  if (accordion.expandAllMode?.value) {
+    return accordion.expandedIndexes?.value?.includes(props.index) || false
+  }
+  
+  // 普通模式：检查是否是当前激活的索引
+  return accordion.activeIndex?.value === props.index
+})
+
+// 检查是否应该显示（根据默认可见数量）
+const isVisible = computed(() => {
+  if (!accordion) return true
+  // 如果 showAll 为 true，显示所有
+  if (accordion.showAll?.value) return true
+  // 否则检查 index 是否在默认可见范围内
+  const defaultVisibleCount = accordion.defaultVisibleCount || 10
+  return props.index < defaultVisibleCount
+})
+
+// 判断是否是最后一个可见的元素
+const isLast = computed(() => {
+  if (!accordion) return false
+  const totalItems = accordion.totalItems || 0
+  
+  // 计算可见的最大索引
+  let maxVisibleIndex = -1
+  if (accordion.showAll?.value) {
+    // 如果显示所有，最后一个可见的是总数量-1
+    maxVisibleIndex = totalItems - 1
+  } else {
+    // 否则是默认可见数量-1，但不能超过总数量
+    const defaultVisibleCount = accordion.defaultVisibleCount || 10
+    maxVisibleIndex = Math.min(defaultVisibleCount - 1, totalItems - 1)
+  }
+  
+  // 当前索引是最后一个可见的索引
+  return props.index === maxVisibleIndex
 })
 
 const handleClick = () => {

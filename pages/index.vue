@@ -6,9 +6,14 @@
         <CourseList />
         <CourseComplateProgrammer />
         <CourseInstructorProfile />
+        <CourseReviews
+          :courseRating="4.7"
+          totalRatings="403K"
+          :reviews="reviewsData"
+        />
         <CourseHorizontalList />
         <div class="mx-auto w-full">
-        <UiAccordion>
+        <UiAccordion :items="accordionData" :defaultVisibleCount="10">
           <UiAccordionItem
             v-for="(item, index) in accordionData"
             :key="index"
@@ -20,7 +25,6 @@
           />
         </UiAccordion>
       </div>
-      <CourseCourseReviews />
       </div>
     </div>
   </div>
@@ -131,6 +135,42 @@ const accordionData = ref([
       { title: 'Docker Containerization', preview: true, duration: '08:15' },
       { title: 'CI/CD Pipeline Setup', preview: false, duration: '07:30' }
     ]
+  },
+  {
+    title: 'Day 11 - Expert - Machine Learning',
+    lectureCount: 13,
+    duration: '2 小时 20 分钟',
+    childrenList: [
+      { title: 'Introduction to Machine Learning', preview: true, duration: '11:30' }
+    ]
+  }
+])
+
+// 评论数据
+const reviewsData = ref([
+  {
+    reviewerName: 'Mohd Kashif A.',
+    reviewText: "I really enjoyed the 100 Projects in 100 Days course. It helped me learn Python by actually building things, from small automation scripts to games and data analysis projects. The instructor's teaching style is clear and engaging, and the projects are well-structured. Each project builds on previous concepts, making it easy to follow along. The course covers a wide range of topics from basics to advanced concepts, which is perfect for both beginners and intermediate learners.",
+    timeAgo: '2 周前',
+    rating: 5
+  },
+  {
+    reviewerName: 'Aime J.',
+    reviewText: "This course exceeded my expectations! The hands-on approach with real projects made learning Python so much more effective than just reading theory. I've completed over 50 projects so far and each one has taught me something new. The instructor explains everything clearly and provides great support. The course structure is logical and the difficulty progression is just right. Highly recommend to anyone wanting to learn Python through practical application.",
+    timeAgo: '3 周前',
+    rating: 5
+  },
+  {
+    reviewerName: 'Priyanka Z.',
+    reviewText: "Excellent course for learning Python! The project-based approach is fantastic. I've learned so much by actually coding rather than just watching videos. The instructor is knowledgeable and explains concepts well. The projects are diverse and cover many real-world scenarios. This course has helped me build a strong portfolio of Python projects.",
+    timeAgo: '1 个月前',
+    rating: 5
+  },
+  {
+    reviewerName: 'Jesse D.',
+    reviewText: "Great course! The 100 projects format is brilliant. Each project is well-explained and builds your skills progressively. I've learned Python fundamentals, web scraping, data analysis, and much more. The instructor's teaching style is engaging and the code examples are clear. This is one of the best Python courses I've taken.",
+    timeAgo: '1 周前',
+    rating: 5
   }
 ])
 </script>
