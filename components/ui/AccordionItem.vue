@@ -4,10 +4,11 @@
     <button
       @click="handleClick"
       :class="[
-        'w-full flex items-start justify-between gap-3 py-4 px-4 text-left transition-colors duration-200',
+        'w-full flex items-start justify-between py-4 px-4 text-left transition-colors duration-200',
         isActive ? 'bg-gray-50' : 'hover:bg-gray-50'
       ]"
     >
+    <div class="flex gap-x-4">
       <!-- 左侧：展开/收起图标 -->
       <svg
         :class="[
@@ -27,7 +28,9 @@
       </svg>
 
       <!-- 中间：标题（可换行） -->
-      <span class="flex-1 font-medium text-gray-900 text-left break-words min-w-0 max-w-md overflow-wrap-anywhere">{{ title }}</span>
+      <span  class="flex-1 font-medium text-gray-900 text-left break-words min-w-0 max-w-md overflow-wrap-anywhere">{{ title }}</span>
+    </div>
+
 
       <!-- 右侧：讲座数量和时间 -->
       <div class="flex-shrink-0 text-sm text-gray-600 ml-2">
@@ -44,14 +47,67 @@
       }"
     >
       <div ref="innerRef" class="px-4 pb-4">
-        <ul class="space-y-2">
+        <ul class="space-y-1">
           <li
             v-for="(child, childIndex) in childrenList"
             :key="childIndex"
-            class="py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors duration-150"
+            class="flex items-center gap-3 py-2 px-2 hover:bg-gray-50 rounded transition-colors duration-150"
           >
             <slot name="child" :item="child" :index="childIndex">
-              {{ child }}
+              <!-- 左侧：视频图标（显示器+播放） -->
+              <div class="flex-shrink-0 relative">
+                <svg
+                  class="w-5 h-5 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <!-- 显示器外框 -->
+                  <rect
+                    x="3"
+                    y="4"
+                    width="18"
+                    height="12"
+                    rx="1"
+                    stroke-width="1.5"
+                  />
+                  <!-- 显示器底座 -->
+                  <path
+                    d="M8 16h8"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                  <!-- 播放按钮 -->
+                  <path
+                    d="M10 9l4 3-4 3V9z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+
+              <!-- 中间：标题 -->
+              <span class="flex-1 text-sm text-gray-900">{{ getChildTitle(child) }}</span>
+
+              <!-- 预览按钮 -->
+              <div v-if="getChildPreview(child)" class="flex items-center gap-1.5 flex-shrink-0">
+                <svg
+                  class="w-4 h-4 text-gray-700"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.1"/>
+                  <path
+                    d="M10 8v8l6-4-6-4z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <span class="text-sm text-purple-600 underline cursor-pointer hover:text-purple-700">预览</span>
+              </div>
+
+              <!-- 右侧：时长 -->
+              <span v-if="getChildDuration(child)" class="text-sm text-gray-500 flex-shrink-0">
+                {{ getChildDuration(child) }}
+              </span>
             </slot>
           </li>
         </ul>
@@ -116,6 +172,21 @@ const metaInfo = computed(() => {
   }
   return parts.join(' • ')
 })
+
+// 获取子项标题（支持对象或字符串）
+const getChildTitle = (child) => {
+  return typeof child === 'object' && child !== null ? child.title : child
+}
+
+// 获取子项是否可预览
+const getChildPreview = (child) => {
+  return typeof child === 'object' && child !== null ? child.preview : false
+}
+
+// 获取子项时长
+const getChildDuration = (child) => {
+  return typeof child === 'object' && child !== null ? child.duration : ''
+}
 
 // 动态计算内容高度
 const innerRef = ref(null)
