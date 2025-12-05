@@ -4,7 +4,7 @@
     <div class="flex items-start gap-3 mb-3">
       <!-- 头像 -->
       <div class="flex-shrink-0">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold text-sm">
+        <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white font-semibold text-sm">
           {{ initials }}
         </div>
       </div>
@@ -35,8 +35,8 @@
       <p
         ref="reviewTextRef"
         :class="[
-          'text-sm text-gray-900 leading-relaxed',
-          showFullText ? '' : 'max-h-20 overflow-hidden'
+          'text-sm text-gray-900 leading-relaxed transition-all duration-300',
+          showFullText ? '' : 'line-clamp-4'
         ]"
       >
         {{ reviewText }}
@@ -100,19 +100,30 @@ const initials = computed(() => {
   return props.reviewerName.substring(0, 2).toUpperCase()
 })
 
-// 检查内容是否超过最大高度
+// 检查内容是否超过行数限制，决定是否显示按钮
+const checkContentLines = () => {
+  if (reviewTextRef.value) {
+    // 临时移除 line-clamp 限制来获取完整内容
+    const originalClass = reviewTextRef.value.className
+    reviewTextRef.value.classList.remove('line-clamp-4')
+    
+    // 计算实际行数
+    const lineHeight = parseFloat(getComputedStyle(reviewTextRef.value).lineHeight)
+    const fullHeight = reviewTextRef.value.scrollHeight
+    const actualLines = Math.ceil(fullHeight / lineHeight)
+    
+    // 恢复原始类名
+    reviewTextRef.value.className = originalClass
+    
+    // 如果实际行数超过 4 行，显示按钮
+    showMoreButton.value = actualLines > 4
+  }
+}
+
 onMounted(() => {
+  // 等待 DOM 渲染完成后检查
   nextTick(() => {
-    if (reviewTextRef.value) {
-      // 临时移除 max-h 限制来获取完整高度
-      const originalClass = reviewTextRef.value.className
-      reviewTextRef.value.classList.remove('max-h-20')
-      const fullHeight = reviewTextRef.value.scrollHeight
-      reviewTextRef.value.className = originalClass
-      
-      const maxHeight = 80 // 20 * 4 = 80px (max-h-20)
-      showMoreButton.value = fullHeight > maxHeight
-    }
+    checkContentLines()
   })
 })
 </script>

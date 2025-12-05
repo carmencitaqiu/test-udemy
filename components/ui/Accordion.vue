@@ -19,7 +19,7 @@
     <slot />
     
     <!-- 显示更多章节按钮 -->
-    <div v-if="showMoreButton" class="px-4 py-4 border-t border-gray-200">
+    <div v-if="showMoreButton" class=" py-4 border-t border-gray-200">
       <button
         @click="expandAll"
         class="w-full py-3 px-4 border border-purple-600 rounded text-purple-600 hover:bg-purple-50 transition-colors duration-200"

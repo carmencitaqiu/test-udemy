@@ -63,12 +63,12 @@
       <p
         ref="descriptionRef"
         :class="[
-          'text-sm text-gray-900 leading-relaxed transition-all duration-300 overflow-hidden',
-          isExpanded ? '' : 'max-h-32'
+          'text-sm text-gray-900 leading-relaxed transition-all duration-300',
+          isExpanded ? '' : 'line-clamp-6'
         ]"
       >
         I'm Angela, I'm a developer with a passion for teaching. I'm the <strong>lead instructor</strong> at the London App Brewery, London's leading <strong>Programming Bootcamp</strong>. I've helped hundreds of thousands of students learn to code and change their lives by becoming a developer. I've been invited by companies such as Twitter, Facebook and Google to teach their employees.
-        <br><br>
+        <br>
         My first foray into programming was when I was just 12 years old, wanting to build my own Space Invader game. Since then, I've made <strong>hundred of websites, apps and games</strong>. But most importantly, I realised that my <strong>greatest</strong> passion is for teaching. I spend most of my time researching how to make learning to code fun and make hard concepts easy to understand. I apply everything I discover into my bootcamp courses. In my courses, you will find lots of geeky humour but also lots of explanations and animations to make sure everything is easy to understand.
       </p>
 
@@ -104,24 +104,30 @@ const toggleExpand = () => {
   isExpanded.value = !isExpanded.value
 }
 
-// 检查内容是否超过最大高度，决定是否显示按钮
-const checkContentHeight = () => {
+// 检查内容是否超过行数限制，决定是否显示按钮
+const checkContentLines = () => {
   if (descriptionRef.value) {
-    // 临时移除 max-h 限制来获取完整高度
+    // 临时移除 line-clamp 限制来获取完整内容
     const originalClass = descriptionRef.value.className
-    descriptionRef.value.classList.remove('max-h-32')
+    descriptionRef.value.classList.remove('line-clamp-6')
+    
+    // 计算实际行数
+    const lineHeight = parseFloat(getComputedStyle(descriptionRef.value).lineHeight)
     const fullHeight = descriptionRef.value.scrollHeight
+    const actualLines = Math.ceil(fullHeight / lineHeight)
+    
+    // 恢复原始类名
     descriptionRef.value.className = originalClass
     
-    const maxHeight = 128 // 32 * 4 = 128px (max-h-32)
-    showToggleButton.value = fullHeight > maxHeight
+    // 如果实际行数超过 4 行，显示按钮
+    showToggleButton.value = actualLines > 4
   }
 }
 
 onMounted(() => {
   // 等待 DOM 渲染完成后检查
   nextTick(() => {
-    checkContentHeight()
+    checkContentLines()
   })
 })
 </script>

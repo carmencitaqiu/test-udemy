@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full my-4">
     <!-- 标题区域 -->
     <div class="mb-6">
       <h2 class="text-xl font-bold text-gray-900">
@@ -20,8 +20,8 @@
     </div>
 
     <!-- 显示所有评论按钮 -->
-    <div class="text-center">
-      <button class="px-6 py-3 bg-purple-600 text-white font-medium rounded hover:bg-purple-700 transition-colors duration-200">
+    <div class="text-left">
+      <button class="px-4 py-2 border border-purple-300 text-purple-600 bg-white font-medium rounded hover:bg-purple-50 transition-colors duration-200">
         显示所有评论
       </button>
     </div>
