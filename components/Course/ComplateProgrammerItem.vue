@@ -4,7 +4,7 @@
   >
     <!-- 左侧：课程缩略图 -->
     <div class="flex-shrink-0">
-      <div style="border: 1px solid red" class="w-[200px] h-[120px] object-cover border border-gray-200 border-solid rounded-sm"></div>
+      <div class="w-[200px] h-[120px] object-cover border border-gray-200 border-solid rounded-sm"></div>
     </div>
 
     <!-- 中间：课程信息 -->
