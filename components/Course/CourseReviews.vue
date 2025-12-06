@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full my-4">
+  <div class="w-full mt-8 mb-4">
     <!-- 标题区域 -->
     <div class="mb-6">
-      <h2 class="text-xl font-bold text-gray-900">
+      <h2 class="text-2xl font-medium text-gray-900">
         {{ courseRating }} 课程评分 • {{ totalRatings }} 评分
       </h2>
     </div>

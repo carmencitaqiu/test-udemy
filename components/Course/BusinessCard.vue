@@ -105,7 +105,7 @@ const isFixed = ref(false)
 const handleScroll = () => {
   const scrollY = window.scrollY
   // 当滚动位置在 400-800 之间时，固定组件
-  isFixed.value = scrollY >= 400
+  isFixed.value = scrollY >= 400 && scrollY <= 3400
 }
 
 onMounted(() => {

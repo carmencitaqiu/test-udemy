@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray-200 rounded p-4 bg-white">
+  <div class="border-t border-b border-gray-200 p-4 bg-white">
     <!-- 用户信息 -->
     <div class="flex items-start gap-3 mb-3">
       <!-- 头像 -->

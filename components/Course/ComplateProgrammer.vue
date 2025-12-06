@@ -1,11 +1,21 @@
 <template>
   <div class="w-full border border-gray-200 border-solid rounded-lg p-6 my-8">
-    <h2 class="text-2xl font-medium">The Complete Programmer</h2>
+    <h2 class="text-2xl font-medium mb-4">The Complete Programmer</h2>
     <CourseComplateProgrammerItem
       v-for="programmer in programmers"
       :key="programmer.id"
       :programmer="programmer"
     />
+    
+    <!-- 底部总价格和按钮 -->
+    <div class="flex justify-between items-center">
+      <div class="text-lg font-bold text-gray-900">
+        总计: US${{ totalPrice.toFixed(2) }}
+      </div>
+      <button class="bg-blue-3  text-white font-bold py-3 px-6 rounded hover:bg-purple-700 transition-colors">
+        全部添加至购物车
+      </button>
+    </div>
   </div>
 </template>
 
@@ -49,4 +59,9 @@ const programmers = [
     price: 94.99,
   },
 ];
+
+// 计算总价格
+const totalPrice = computed(() => {
+  return programmers.reduce((sum, programmer) => sum + programmer.price, 0)
+})
 </script>

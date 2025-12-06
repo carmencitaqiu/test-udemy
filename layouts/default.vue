@@ -2,9 +2,10 @@
   <div class="min-h-screen">
      <CommonStickyHeader />
      <CommonNavbar />
-    <main>
-    <slot />
-    </main>
+     <main>
+     <slot />
+     </main>
+     <CommonFooter />
   </div>
 </template>
 
